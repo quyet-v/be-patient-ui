@@ -8,8 +8,7 @@
     "test": "vitest --run",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "prepare": "husky"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@mantine/core": "^7.17.2",
