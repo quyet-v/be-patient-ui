@@ -1,4 +1,3 @@
-import React from 'react';
 import '../App.css'
 import {AppRouter} from "./router.tsx";
 import {MantineProvider} from "@mantine/core";

@@ -12,7 +12,11 @@ const useLogin = () => {
 
     const { isPending,mutate } = useMutation({
         mutationFn: (loginData: LoginRequest) => {
-            return axios.post(`${import.meta.env.VITE_API_URL}/login?useCookies=true&useSessionCookies=true`, loginData)
+            return axios.post(
+                `${import.meta.env.VITE_API_URL}/login?useCookies=true&useSessionCookies=true`,
+                loginData,
+                {withCredentials: true}
+            )
         }
     })
 

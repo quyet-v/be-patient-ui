@@ -1,4 +1,3 @@
-import React from 'react';
 import {createBrowserRouter, RouterProvider} from "react-router";
 import {LoginRoute} from "./routes/login.tsx";
 import {HomeRoute} from "./routes/home.tsx";
