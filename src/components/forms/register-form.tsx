@@ -1,4 +1,3 @@
-import React from 'react';
 import {Controller, SubmitHandler, useForm} from 'react-hook-form';
 import {AuthLayout} from "../layouts/auth-layout.tsx";
 import {Button, Select, TextInput} from "@mantine/core";

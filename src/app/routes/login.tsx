@@ -1,4 +1,3 @@
-import React from 'react';
 import {LoginForm} from "../../components/forms/login-form.tsx";
 
 export const LoginRoute = () => {

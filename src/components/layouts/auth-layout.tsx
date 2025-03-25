@@ -12,7 +12,7 @@ export const AuthLayout: React.FC<Props> = ({children, title, redirect}) => {
     return <div>
         <div className={"flex justify-center items-center flex-col mb-4"}>
             <NavLink to={"/"} className={"flex justify-center items-center flex-col space-y-6"}>
-                <img width="100" height="100" src="/public/be-patient-logo.png" alt="bePatient Logo"/>
+                <img width="100" height="100" src="/be-patient-logo.png" alt="bePatient Logo"/>
             </NavLink>
             <h2 className={"text-3xl font-bold"}>{title}</h2>
         </div>
