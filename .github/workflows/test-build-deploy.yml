@@ -1,0 +1,72 @@
+name: Test, Build, and Deploy
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.14.0'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm run test
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.14.0'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build app
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-artifact
+          path: ./dist
+          retention-day: 1
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: app-artifact
+          path: ./deploy
+
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub
+          chmod 600 ~/.ssh/id_rsa.pub
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 170.64.184.169 >> ~/.ssh/known_hosts
+      - name: Deploy
+        run: |
+          ssh root@170.64.184.169 "rm -rf /var/www/finnancer-ui.com/html/*"
+          scp -r ./deploy/* root@170.64.184.169:/var/www/finnancer-ui.com/html
