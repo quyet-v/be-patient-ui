@@ -14,7 +14,7 @@ export const LoginForm = () => {
     const { isPending,login } = useLogin();
 
     const onSubmit: SubmitHandler<FormFields> = (data) => {
-        login(data, "/");
+        login(data, "/app");
     }
 
     return <AuthLayout title="Log in to your account" redirect={<NavLink to={"/auth/register"}>Register</NavLink>}>
